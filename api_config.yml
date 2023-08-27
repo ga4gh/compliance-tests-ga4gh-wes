@@ -1,0 +1,13 @@
+# API Constants
+
+ENDPOINT_TO_MODEL:
+  list_runs: RunListResponse
+  run_workflow: RunId
+  cancel_run: RunId
+  get_run_log: RunLog
+  run_status: RunStatus
+  service_info: ServiceInfo
+
+REQUEST_HEADERS:
+  Accept: application/json
+  Content-Type: application/json
