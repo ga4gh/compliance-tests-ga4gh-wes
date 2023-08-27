@@ -1,0 +1,8 @@
+- name: run_workflow
+  description: Create a new workflow run
+  endpoint: /runs
+  operation: POST
+  storage_vars:
+    run_id: $response.run_id
+  response:
+    200:

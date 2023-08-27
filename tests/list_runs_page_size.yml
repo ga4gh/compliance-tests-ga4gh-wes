@@ -1,0 +1,32 @@
+description: Test to validate page size in list runs
+service: WES
+versions:
+  - 1.0.0
+tags: []
+jobs:
+  - $ref: "templates/run_workflow_template.yml"
+  - $ref: "templates/run_workflow_template.yml"
+  - name: list_runs
+    description: Set page_size as 1
+    endpoint: /runs
+    operation: GET
+    query_parameters:
+      - page_size: 1
+    filter:
+      - path: $response.runs
+        type: array
+        size: 1
+    response:
+      200: {}
+  - name: list_runs
+    description: Set page_size as 2
+    endpoint: /runs
+    operation: GET
+    query_parameters:
+      - page_size: 2
+    filter:
+      - path: $response.runs
+        type: array
+        size: 2
+    response:
+      200: {}

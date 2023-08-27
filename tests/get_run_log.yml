@@ -1,0 +1,16 @@
+description: Test to retrieve the workflow run detailed info
+service: WES
+versions:
+  - 1.0.0
+tags:
+  - schema_validation_only
+jobs:
+  - $ref: "templates/run_workflow_template.yml"
+  - name: get_run_log
+    description: Retrieve the workflow run information
+    endpoint: /runs/{run_id}
+    operation: GET
+    path_parameters:
+      run_id: "{run_id}"
+    response:
+      200: {}

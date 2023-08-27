@@ -1,0 +1,33 @@
+description: Test to retrieve the service info
+service: WES
+versions:
+  - 1.0.0
+tags:
+  - schema_validation_only
+jobs:
+  - name: service_info
+    description: Retrieve the WES service info
+    endpoint: /service-info
+    operation: GET
+    response:
+      200: {}
+  - name: service_info
+    description: Validate number of states
+    endpoint: /service-info
+    operation: GET
+    filter:
+      - path: $response.system_state_counts
+        type: object
+        size: 10
+    response:
+      200: {}
+  - name: service_info
+    description: Validate WES version
+    endpoint: /service-info
+    operation: GET
+    filter:
+      - path: $response.supported_wes_versions
+        type: array
+        value: "1.0.0"
+    response:
+      200: {}

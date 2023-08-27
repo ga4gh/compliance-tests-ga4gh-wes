@@ -1,0 +1,33 @@
+Not working, need to wait for Polling to be fixed
+description: Job to cancel a WES workflow run and monitor status
+service: WES
+versions:
+  - 1.0.0
+tags: []
+jobs:
+  - $ref: "templates/run_workflow_template.yml"
+  - name: cancel_run
+    description: Cancel the workflow run
+    endpoint: /runs/{run_id}/cancel
+    operation: POST
+    path_parameters:
+      run_id: "{run_id}"
+    response:
+      200: {}
+  - name: run_status
+    description: Validate the workflow run status to be "CANCELED" or "CANCELING"
+    endpoint: /runs/{run_id}/status
+    operation: GET
+    path_parameters:
+      run_id: "{run_id}"
+    polling:
+      interval: 10
+      timeout: 3600
+    filter:
+      - path: $response.state
+        type: string
+        regex: True
+        value: \b(CANCELED|CANCELING)\b
+        size: 1
+    response:
+      200: {}

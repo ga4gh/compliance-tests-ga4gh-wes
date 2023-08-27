@@ -1,0 +1,16 @@
+description: Job to cancel a WES workflow run
+service: WES
+versions:
+  - 1.0.0
+tags:
+  - schema_validation_only
+jobs:
+  - $ref: "templates/run_workflow_template.yml"
+  - name: cancel_run
+    description: Cancel the workflow run
+    endpoint: /runs/{run_id}/cancel
+    operation: POST
+    path_parameters:
+      run_id: "{run_id}"
+    response:
+      200: {}

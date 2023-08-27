@@ -1,0 +1,19 @@
+No field is required. Makes sense to validate resp.request? Even if whole resp is empty, it is compliant acc to specs
+
+Play with workflow params, type, version in POST and then validate
+description: Test to retrieve the workflow run detailed info
+service: WES
+versions:
+  - 1.0.0
+tags:
+  - schema_validation_only
+jobs:
+  - $ref: "templates/run_workflow_template.yml"
+  - name: get_run
+    description: Retrieve the workflow run information
+    endpoint: /runs/{run_id}
+    operation: GET
+    path_parameters:
+      run_id: "{run_id}"
+    response:
+      200: {}

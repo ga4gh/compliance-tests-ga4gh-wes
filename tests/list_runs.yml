@@ -1,0 +1,14 @@
+description: Test to retrieve list of workflow runs
+service: WES
+versions:
+  - 1.0.0
+tags:
+  - schema_validation_only
+jobs:
+  - $ref: "templates/run_workflow_template.yml"
+  - name: list_runs
+    description: Retrieve the list of workflow runs and validate schema
+    endpoint: /runs
+    operation: GET
+    response:
+      200: {}

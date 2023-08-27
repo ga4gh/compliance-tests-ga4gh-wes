@@ -1,0 +1,24 @@
+description: Test to create a WES workflow run
+service: WES
+versions:
+  - 1.0.0
+tags:
+  - schema_validation_only
+jobs:
+  - $ref: "templates/run_workflow_template.yml"
+  - name: run_status
+    description: Validate the workflow run status to be "COMPLETE"
+    endpoint: /runs/{run_id}/status
+    operation: GET
+    path_parameters:
+      run_id: "{run_id}"
+    polling:
+      interval: 10
+      timeout: 3600
+    filter:
+      - path: $response.state
+        type: string
+        value: COMPLETE
+        size: 1
+    response:
+      200: {}

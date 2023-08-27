@@ -1,0 +1,8 @@
+description: Test to create a WES workflow run
+service: WES
+versions:
+  - 1.0.0
+tags:
+  - schema_validation_only
+jobs:
+  - $ref: "templates/run_workflow_template.yml"
