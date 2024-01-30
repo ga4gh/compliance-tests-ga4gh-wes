@@ -1,0 +1,151 @@
+descrition: Job to restrice the service infor and workflow environment
+service: WES  
+version:
+  -1.0.0
+  -1.1.0
+tags:
+  -schema_validation_only
+jobs:
+  - name: service_info
+    description: Restrive the WES server info
+    endpoint: /service-info
+    operation: GET
+    response: 
+    200: {}
+
+  - name: service_info
+    description: Validate generic information-id,name, type, organization, version
+    endpoint: /service-info
+    operation: GET
+    filter: 
+      - path: $response.id
+        type: string
+    response: 
+     200: {}
+
+  - name: service_info
+    description: Validate generic information-id,name, type, organization, version
+    endpoint: /service-info
+    operation: GET
+    filter: 
+      - path: $response.name
+        type: string
+    response: 
+     200: {}
+
+  - name: service_info
+    description: Validate generic information-id,name, type, organization, version
+    endpoint: /service-info
+    operation: GET
+    filter: 
+      - path: $response.type
+        type: object 
+     #at https://raw.githubusercontent.com/ga4gh-discovery/ga4gh-service-info/v1.0.0/service-info.yaml#/components/schemas/Service, it stated as string for type, but for ServiceType is object.
+     # The actual response from swaggle UI is object. 
+    response: 
+     200: {}
+
+  - name: service_info
+    description: Validate generic information-id,name, type, organization, version
+    endpoint: /service-info
+    operation: GET
+    filter: 
+      - path: $response.organization
+        type: object
+    response: 
+     200: {} 
+
+  - name: service_info
+    description: Validate generic information-id,name, type, organization, version
+    endpoint: /service-info
+    operation: GET
+    filter: 
+      - path: $response.version
+        type: string
+    response: 
+     200: {}
+
+  - name: service_info
+    description: Validate workflow type version
+    endpoint: /service-info
+    operation: GET
+    filter:
+      - path: $response.workflow_type_versions
+        type: object
+    response:
+      200: {}
+
+  - name: service_info
+    description: Validate WES version
+    endpoint: /service-info
+    operation: GET
+    filter:
+      - path: $response.supported_wes_versions
+        type: array
+        value: "1.0.0"
+    response:
+      200: {}   
+
+  - name: service_info
+    description: Validate supported_filesystem_protocols
+    endpoint: /service-info
+    operation: GET
+    filter:
+      - path: $response.supported_filesystem_protocols
+        type: object
+    response:
+      200: {}
+
+  - name: service_info
+    description: Validate workflow engine versions
+    endpoint: /service-info
+    operation: GET
+    filter:
+      - path: $response.workflow_engine_versions
+        type: array
+    response:
+      200: {}
+
+  - name: service_info
+    description: Validate default_workflow_engine_parameters
+    endpoint: /service-info
+    operation: GET
+    filter:
+      - path: $response.default_workflow_engine_parameters
+        type: object
+    response:
+      200: {}
+
+  - name: service_info
+    description: Validate number of states
+    endpoint: /service-info
+    operation: GET
+    filter:
+      - path: $response.system_state_counts
+        type: object
+        size: 10 
+        #did not specifiy the size in the specification
+    response:
+      200: {}
+
+  - name: service_info
+    description: Validate auth_instruction url
+    endpoint: /service-info
+    operation: GET
+    filter:
+      - path: $response.uth_instructions_url
+        type: string
+    response:
+      200: {}
+
+  - name: service_info
+    description: Validate tag 
+    endpoint: /service-info
+    operation: GET
+    filter:
+      - path: $response.tags
+        type: object
+    response:
+      200: {}
+
+
